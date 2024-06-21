@@ -5,21 +5,15 @@ from matplotlib import pyplot as plt
 from matplotlib.colors import ListedColormap
 import requests
 import torch
+from dotenv import load_dotenv
+load_dotenv()
 
-OPENAI_API_KEY = ""
-CLAUDE_API_KEY = ""
 
-# check if keys.txt exists
-if os.path.exists("keys.txt"):
-    # read keys.txt
-    with open("keys.txt", "r") as f:
-        lines = f.readlines()
-        OPENAI_API_KEY = lines[0].strip().replace("OPENAI_API_KEY=", "")
-        CLAUDE_API_KEY = lines[1].strip().replace("CLAUDE_API_KEY=", "")
-elif os.environ.get("OPENAI_API_KEY") is not None and os.environ.get("CLAUDE_API_KEY") is not None:
-    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-    CLAUDE_API_KEY = os.environ.get("CLAUDE_API_KEY")
-else:
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+CLAUDE_API_KEY = os.getenv('CLAUDE_API_KEY')
+
+
+if not OPENAI_API_KEY and not CLAUDE_API_KEY:
     print("Please add your OpenAI API key and Claude API key to a file called keys.txt or set them as environment variables")
     exit()
 

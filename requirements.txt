@@ -1,2 +1,6 @@
 torch
 numpy==1.26.0
+requests
+matplotlib
+requests
+python-dotenv
